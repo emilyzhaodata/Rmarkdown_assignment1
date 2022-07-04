@@ -1,0 +1,92 @@
+---
+output:
+  knitrBootstrap::bootstrap_document:
+title: "ANA 515 Assignment 1"
+theme: slate
+author: "Emily Zhao"
+date: "2022"
+
+
+
+---
+
+```{r setup, include = TRUE}
+#The include = FALSE function hides both the code and output in my output document
+
+#You need to install these packages first to be able to use the functions within them. You can install them from the Tools tab or write a new code chunk: install.packages("package_name"). 
+
+#install.packages("tidyverse")
+#install.packages("knitr")
+#install.packages("bslib")
+
+#library(devtools)
+#install_github('rstudio/rmarkdown')
+#install.packages('knitr', repos = c('http://rforge.net', 'http://cran.rstudio.org'),
+                # type = 'source')
+#install_github('jimhester/knitrBootstrap')
+#library(rmarkdown)
+library(knitrBootstrap)
+
+
+
+```
+
+4.	code chunk to get the dataset from GitHub/fivethirtyeight
+
+``` {r, include = TRUE}
+url <- "https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"
+library(tidyverse)
+#library(knitr)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+gun <- read_csv(url)
+glimpse(gun)
+
+
+```
+5.	code chunk to create a subset of gun_deaths
+a.	Call the installed packages
+b.	create a new dataset with the name of ‘youth’ from the dataset ‘gun_deaths’ that filters gun_deaths by 
+age <= 65
+
+
+``` {r, include = TRUE}
+#a
+library(tidyverse)
+#library(knitr)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+
+#b
+youth<-gun%>%filter(age<=65)
+
+
+```
+7.	Write inline code that says:
+##`We have data about 100798 individuals killed by guns. Only 15687 are older than 65.` 
+
+```{r, include = TRUE}
+nrow(gun)-nrow(youth)
+
+```
+
+8.	Code chunk to graph the distribution of the age variable from the youth dataset:
+Use the ggplot function:
+```{r, include = TRUE}
+youth%>%
+ggplot(aes(age))+
+geom_freqpoly(binwidth=1)
+
+```
+9.	Code chunk to graph the distribution of youth by race
+```{r, include = TRUE}
+#Once all of my code has been written, I click on the Knit button in the tool bar above to produce my document.
+youth %>% 
+ggplot(aes(fct_infreq(race) %>% fct_rev())) + 
+geom_bar() + coord_flip() + 
+labs(x = "Victim race") 
+
+
+```

@@ -1,0 +1,1261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Emily Zhao" />
+  <meta name="date" content="2022-01-01" />
+  <title>ANA 515 Assignment 1</title>
+  <style type="text/css">
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+  <!-- bootstrap -->
+  <!--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"  id="style">-->
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+  <!-- highlight.js -->
+  <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" rel="stylesheet" id="code-style">-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>
+  <script>
+  hljs.LANGUAGES.r=function(a){var b="([a-zA-Z]|\\.[a-zA-Z.])[a-zA-Z0-9._]*";return{c:[a.HCM,{b:b,l:b,k:{keyword:"function if in break next repeat else for return switch while try tryCatch|10 stop warning require library attach detach source setMethod setGeneric setGroupGeneric setClass ...|10",literal:"NULL NA TRUE FALSE T F Inf NaN NA_integer_|10 NA_real_|10 NA_character_|10 NA_complex_|10"},r:0},{cN:"number",b:"0[xX][0-9a-fA-F]+[Li]?\\b",r:0},{cN:"number",b:"\\d+(?:[eE][+\\-]?\\d*)?L\\b",r:0},{cN:"number",b:"\\d+\\.(?!\\d)(?:i\\b)?",r:0},{cN:"number",b:"\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",r:0},{b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[a.BE],r:0},{cN:"string",b:"'",e:"'",c:[a.BE],r:0}]}}(hljs); </script>
+  <!--<script type="text/javascript", src="https://yandex.st/highlightjs/7.3/languages/r.min.js"></script>-->
+
+  <!-- Manific Popup -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.8.9/jquery.magnific-popup.min.js"></script>
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script defer="defer">
+  // Function to generate the dynamic table of contents
+  jQuery.fn.generate_TOC = function () {
+    var base = $(this[0]);
+
+    var selectors = ['h1', 'h2', 'h3', 'h4'];
+
+    var last_ptr = [{}, {}, {}, {}];
+
+    var anchors = {};
+
+    generate_anchor = function (text) {
+      var test = text.replace(/\W/g, '_');
+
+      while(test in anchors){
+        //if no suffix, add one
+        if(test.match(/_\d+$/) === null){
+          test = test + "_2";
+        }
+        //else generate unique id for duplicates by adding one to the suffix
+        else {
+          test = test.replace(/_(\d+)$/, function(match, number){ var num=+number+1; return("_" + num) });
+        }
+      }
+      anchors[test]=1;
+      return(test);
+    }
+
+    $(selectors.join(',')).filter(function(index) { return $(this).parent().attr("id") != 'header'; }).each(function () {
+
+      var heading = $(this);
+      var idx = selectors.indexOf(heading.prop('tagName').toLowerCase());
+      var itr = 0;
+
+      while (itr <= idx) {
+        if (jQuery.isEmptyObject(last_ptr[itr])) {
+          last_ptr[itr] = $('<ul>').addClass('nav');
+          if (itr === 0) {
+            base.append(last_ptr[itr])
+          } else {
+            if(last_ptr[itr-1].children('li').length === 0){
+              last_ptr[itr-1].append(last_ptr[itr]);
+            }
+            else {
+              last_ptr[itr - 1].children('li').last().append(last_ptr[itr]);
+            }
+          }
+        }
+        itr++;
+      }
+      var anchor = generate_anchor(heading.text());
+      heading.attr('id', anchor);
+      var a = $('<a>')
+      .text(heading.text())
+      .attr('href', '#' + anchor);
+
+    var li = $('<li>')
+      .append(a);
+
+    last_ptr[idx].append(li);
+    for (i = idx + 1; i < last_ptr.length; i++) {
+      last_ptr[i] = {};
+    }
+    });
+  }
+  /* run scripts when document is ready */
+  $(function() {
+    "use strict";
+
+    var $window = $(window);
+    var $body = $(document.body);
+
+    /* size of thumbnails */
+
+    var hidden_types = ['source']
+    var output_types = ['output', 'message', 'warning', 'error']
+
+    /* style tables */
+    $('table').addClass('table table-striped table-bordered table-hover table-condensed');
+
+    $('pre code').each(function(i, e) {
+      hljs.highlightBlock(e);
+    });
+
+    /* Magnific Popup */
+    $(".thumbnail").each(function(){
+      $(this).magnificPopup({
+        disableOn: 768,
+        closeOnContentClick: true,
+
+        type: 'image',
+        items: {
+          src: $(this).find('img').attr('src'),
+        }
+      });
+    });
+
+    function toggle_block(obj, show) {
+      var span = obj.find('span');
+      if(show === true){
+        span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        obj.next('pre').slideDown();
+      }
+      else {
+        span.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        obj.next('pre').slideUp();
+      }
+    }
+
+    function toggle_thumbnails(imgs, show){
+      if(show === true){
+        imgs.parents().show()
+        imgs.slideDown();
+      }
+      else {
+        imgs.slideUp(400, function(){ $(this).parent().hide(); });
+      }
+    }
+
+    function global_toggle(obj){
+      var type = obj.attr('type');
+      var show = !obj.parent('li').hasClass('active');
+      if(show === true){
+        obj.parent('li').addClass('active');
+      }
+      else{
+        obj.parent('li').removeClass('active');
+      }
+      if(type == 'figure'){
+        toggle_thumbnails($('.thumbnail img'), show);
+      }
+      else {
+        $('.toggle.' + type).each(function() { toggle_block($(this), show); });
+      }
+    }
+
+    /* onclick toggle next code block */
+    $('.toggle').click(function() {
+      var span = $(this).find('span');
+      toggle_block($(this), !span.hasClass('glyphicon-chevron-down'));
+      return false
+    })
+
+    // global toggles
+    $('.toggle-global').click(function(){
+      var type = $(this).attr('type');
+      if(type === 'all-source'){
+          $('li a.source').each(function() {
+            global_toggle($(this));
+          });
+        }
+      else if(type === 'all-output'){
+        $.each(output_types, function(i, val){
+          console.log(val);
+          global_toggle($('li a.' + val));
+        });
+      }
+      else {
+        console.log($(this));
+        global_toggle($(this));
+      }
+      return false;
+    });
+    /* table of contents */
+    if($(['h1', 'h2', 'h3', 'h4'].join(',')).length > 0){
+      $('body > #wrap > .container > .row').append('<div class="col-md-2"><div id="toc" class="well sidebar sidenav affix hidden-print"/></div>');
+      $('#toc').generate_TOC();
+    }
+
+    $.each(hidden_types, function(i, type) {
+      $('li[type=' + type + ']').each(function(){ global_toggle($(this)); });
+    });
+
+    /* remove paragraphs with no content */
+    $('p:empty').remove();
+
+    $body.scrollspy({
+      target: '.sidebar',
+    });
+
+    /* theme switch */
+    $('.theme-switch').click(function(){
+      var css = $('link[title=' + $(this).attr('title') + ']');
+      $('#theme[rel=stylesheet]').attr('href', css.attr('href'));
+      $('.theme-switch').closest('li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      return false;
+    });
+    /* code style switch */ //TODO use same function for both of these?
+    $('.highlight-switch').click(function(){
+      var css = $('link[title="' + $(this).attr('title') + '"]');
+      $('#highlight[rel=stylesheet]').attr('href', css.attr('href'));
+      $('.highlight-switch').closest('li').removeClass('active');
+      $(this).closest('li').addClass('active');
+      return false;
+    });
+
+    //TODO refresh on show/hide
+    $window.on('load', function () {
+      $body.scrollspy('refresh');
+    })
+
+  });
+
+  </script>
+  <style>
+  /* Knitr_bootstrap styles */
+  #header {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  #wrap .container-fluid {
+    padding: 0;
+    overflow: hidden;
+  }
+  .toggle{
+    text-transform: capitalize;
+  }
+
+  .toggle-global{
+    text-transform: capitalize;
+  }
+
+  /* Sticky footer styles */
+  * {
+    margin:0;
+  }
+  html,
+  body {
+      height: 100%;
+      padding:0 !important;
+      /* The html and body elements cannot have any padding or margin. */
+      /*overflow-x: hidden;*/
+  }
+
+  /* Wrapper for page content to push down footer */
+  #wrap {
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+      /* Negative indent footer by it's height */
+      margin: 0 auto -120px;
+  }
+
+  /* Set the fixed height of the footer here */
+  #push,
+  #footer {
+      height: 120px;
+  }
+
+  #footer {
+    text-align: center;
+  }
+
+  /* Top level subheader elements.  These are the first nested items underneath a header element. */
+  .header li {
+    font-size: 20px;
+  }
+
+  /* Makes the font smaller for all subheader elements. */
+  .sub-header li {
+      font-size: 12px;
+  }
+
+  button.thumbnails {
+    margin-left:0px;
+  }
+
+  /*
+   * Side navigation
+   *
+   * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+   * sections of docs content.
+   */
+
+  /* By default it's not affixed in mobile views, so undo that */
+  .sidebar.affix {
+    position: static;
+  }
+
+  /* First level of nav */
+  .sidenav {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top:    10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  /* All levels of nav */
+  .sidebar .nav > li > a {
+    display: block;
+    padding: 5px 20px;
+  }
+  .sidebar .nav > li > a:hover,
+  .sidebar .nav > li > a:focus {
+    text-decoration: none;
+    border-right: 1px solid;
+  }
+  .sidebar .nav > .active > a,
+  .sidebar .nav > .active:hover > a,
+  .sidebar .nav > .active:focus > a {
+    font-weight: bold;
+    background-color: transparent;
+    border-right: 1px solid;
+  }
+
+  /* Nav: second level (shown on .active) */
+  .sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    margin-bottom: 8px;
+  }
+  .sidebar .nav .nav > li > a {
+    padding-top:    3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+  }
+
+  .sidebar .nav .nav .nav > li > a {
+    padding-left: 40px;
+  }
+  .sidebar .nav .nav .nav .nav > li > a {
+    padding-left: 50px;
+  }
+
+  /* Show and affix the side nav when space allows it */
+  @media screen and (min-width: 992px) {
+    .sidebar .nav > .active > ul {
+      display: block;
+    }
+    /* Widen the fixed sidebar */
+    .sidebar.affix,
+    .sidebar.affix-bottom {
+      width: 213px;
+    }
+    .sidebar.affix-top,
+    .sidebar.affix {
+      position: fixed; /* Undo the static from mobile first approach */
+      top: 30px;
+    }
+    .sidebar.affix-bottom {
+      position: absolute; /* Undo the static from mobile first approach */
+    }
+    .sidebar.affix-bottom .sidenav,
+    .sidebar.affix .sidenav {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .sidebar.affix-bottom,
+    .sidebar.affix {
+      width: 263px;
+    }
+  }
+
+  #toc {
+    padding: 10px 0px;
+    margin:0;
+    border:0;
+  }
+
+
+  .panel pre {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  button + pre {
+    margin: 0;
+    padding: 0;
+  }
+  pre code {
+    border-radius: 0;
+  }
+  /* Magnific Popup CSS */
+  .mfp-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1042;
+    overflow: hidden;
+    position: fixed;
+    background: #0b0b0b;
+    opacity: 0.8;
+    filter: alpha(opacity=80); }
+
+  .mfp-wrap {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1043;
+    position: fixed;
+    outline: none !important;
+    -webkit-backface-visibility: hidden; }
+
+  .mfp-container {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    padding: 0 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+  .mfp-container:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+
+  .mfp-align-top .mfp-container:before {
+    display: none; }
+
+  .mfp-content {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 auto;
+    text-align: left;
+    z-index: 1045; }
+
+  .mfp-inline-holder .mfp-content,
+  .mfp-ajax-holder .mfp-content {
+    width: 100%;
+    cursor: auto; }
+
+  .mfp-ajax-cur {
+    cursor: progress; }
+
+  .mfp-zoom-out-cur,
+  .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+    cursor: -moz-zoom-out;
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out; }
+
+  .mfp-zoom {
+    cursor: pointer;
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in; }
+
+  .mfp-auto-cursor .mfp-content {
+    cursor: auto; }
+
+  .mfp-close,
+  .mfp-arrow,
+  .mfp-preloader,
+  .mfp-counter {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none; }
+
+  .mfp-loading.mfp-figure {
+    display: none; }
+
+  .mfp-hide {
+    display: none !important; }
+
+  .mfp-preloader {
+    color: #cccccc;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    text-align: center;
+    margin-top: -0.8em;
+    left: 8px;
+    right: 8px;
+    z-index: 1044; }
+
+  .mfp-preloader a {
+    color: #cccccc; }
+
+  .mfp-preloader a:hover {
+    color: white; }
+
+  .mfp-s-ready .mfp-preloader {
+    display: none; }
+
+  .mfp-s-error .mfp-content {
+    display: none; }
+
+  button.mfp-close,
+  button.mfp-arrow {
+    overflow: visible;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    display: block;
+    padding: 0;
+    z-index: 1046;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+
+  button::-moz-focus-inner {
+    padding: 0;
+    border: 0; }
+
+  .mfp-close {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    text-align: center;
+    opacity: 0.65;
+    padding: 0 0 18px 10px;
+    color: white;
+    font-style: normal;
+    font-size: 28px;
+    font-family: Arial, Baskerville, monospace; }
+    .mfp-close:hover, .mfp-close:focus {
+      opacity: 1; }
+    .mfp-close:active {
+      top: 1px; }
+
+  .mfp-close-btn-in .mfp-close {
+    color: #333333; }
+
+  .mfp-image-holder .mfp-close,
+  .mfp-iframe-holder .mfp-close {
+    color: white;
+    right: -6px;
+    text-align: right;
+    padding-right: 6px;
+    width: 100%; }
+
+  .mfp-counter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #cccccc;
+    font-size: 12px;
+    line-height: 18px; }
+
+  .mfp-arrow {
+    position: absolute;
+    opacity: 0.65;
+    margin: 0;
+    top: 50%;
+    margin-top: -55px;
+    padding: 0;
+    width: 90px;
+    height: 110px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+  .mfp-arrow:active {
+    margin-top: -54px; }
+
+  .mfp-arrow:hover,
+  .mfp-arrow:focus {
+    opacity: 1; }
+
+  .mfp-arrow:before, .mfp-arrow:after,
+  .mfp-arrow .mfp-b,
+  .mfp-arrow .mfp-a {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 35px;
+    margin-left: 35px;
+    border: medium inset transparent; }
+  .mfp-arrow:after,
+  .mfp-arrow .mfp-a {
+    border-top-width: 13px;
+    border-bottom-width: 13px;
+    top: 8px; }
+  .mfp-arrow:before,
+  .mfp-arrow .mfp-b {
+    border-top-width: 21px;
+    border-bottom-width: 21px; }
+
+  .mfp-arrow-left {
+    left: 0; }
+    .mfp-arrow-left:after,
+    .mfp-arrow-left .mfp-a {
+      border-right: 17px solid white;
+      margin-left: 31px; }
+    .mfp-arrow-left:before,
+    .mfp-arrow-left .mfp-b {
+      margin-left: 25px;
+      border-right: 27px solid #3f3f3f; }
+
+  .mfp-arrow-right {
+    right: 0; }
+    .mfp-arrow-right:after,
+    .mfp-arrow-right .mfp-a {
+      border-left: 17px solid white;
+      margin-left: 39px; }
+    .mfp-arrow-right:before,
+    .mfp-arrow-right .mfp-b {
+      border-left: 27px solid #3f3f3f; }
+
+  .mfp-iframe-holder {
+    padding-top: 40px;
+    padding-bottom: 40px; }
+
+  .mfp-iframe-holder .mfp-content {
+    line-height: 0;
+    width: 100%;
+    max-width: 900px; }
+
+  .mfp-iframe-scaler {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-top: 56.25%; }
+
+  .mfp-iframe-scaler iframe {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    background: black; }
+
+  .mfp-iframe-holder .mfp-close {
+    top: -40px; }
+
+  /* Main image in popup */
+  img.mfp-img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    line-height: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 40px 0 40px;
+    margin: 0 auto; }
+
+  /* The shadow behind the image */
+  .mfp-figure:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 40px;
+    bottom: 40px;
+    display: block;
+    right: 0;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    background: #444444; }
+
+  .mfp-figure {
+    line-height: 0; }
+
+  .mfp-bottom-bar {
+    margin-top: -36px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    cursor: auto; }
+
+  .mfp-title {
+    text-align: left;
+    line-height: 18px;
+    color: #f3f3f3;
+    word-wrap: break-word;
+    padding-right: 36px; }
+
+  .mfp-figure small {
+    color: #bdbdbd;
+    display: block;
+    font-size: 12px;
+    line-height: 14px; }
+
+  .mfp-image-holder .mfp-content {
+    max-width: 100%; }
+
+  .mfp-gallery .mfp-image-holder .mfp-figure {
+    cursor: pointer; }
+
+  @media screen and (max-width: 800px) and (orientation: landscape), screen and (max-height: 300px) {
+    /**
+     * Remove all paddings around the image on small screen
+     */
+    .mfp-img-mobile .mfp-image-holder {
+      padding-left: 0;
+      padding-right: 0; }
+
+    .mfp-img-mobile img.mfp-img {
+      padding: 0; }
+
+    /* The shadow behind the image */
+    .mfp-img-mobile .mfp-figure:after {
+      top: 0;
+      bottom: 0; }
+
+    .mfp-img-mobile .mfp-bottom-bar {
+      background: rgba(0, 0, 0, 0.6);
+      bottom: 0;
+      margin: 0;
+      top: auto;
+      padding: 3px 5px;
+      position: fixed;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box; }
+
+    .mfp-img-mobile .mfp-bottom-bar:empty {
+      padding: 0; }
+
+    .mfp-img-mobile .mfp-counter {
+      right: 5px;
+      top: 3px; }
+
+    .mfp-img-mobile .mfp-close {
+      top: 0;
+      right: 0;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      background: rgba(0, 0, 0, 0.6);
+      position: fixed;
+      text-align: center;
+      padding: 0; }
+
+    .mfp-img-mobile .mfp-figure small {
+      display: inline;
+      margin-left: 5px; } }
+  @media all and (max-width: 900px) {
+    .mfp-arrow {
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75); }
+
+    .mfp-arrow-left {
+      -webkit-transform-origin: 0;
+      transform-origin: 0; }
+
+    .mfp-arrow-right {
+      -webkit-transform-origin: 100%;
+      transform-origin: 100%; }
+
+    .mfp-container {
+      padding-left: 6px;
+      padding-right: 6px; } }
+  .mfp-ie7 .mfp-img {
+    padding: 0; }
+  .mfp-ie7 .mfp-bottom-bar {
+    width: 600px;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: 5px;
+    padding-bottom: 5px; }
+  .mfp-ie7 .mfp-container {
+    padding: 0; }
+  .mfp-ie7 .mfp-content {
+    padding-top: 44px; }
+  .mfp-ie7 .mfp-close {
+    top: 0;
+    right: 0;
+    padding-top: 0; }
+
+  //Magnific overrides
+  .mfp-image img{
+    background: white;
+  }
+  .mfp-figure:after {
+    background: white;
+  }
+
+  /*
+   * Off Canvas navbar toggle right
+   * --------------------------------------------------
+   */
+
+  @media screen and (max-width: 768px) {
+    .row-offcanvas .collapsing {
+    -webkit-transition: none 0;
+      -moz-transition: none 0;
+      transition: none 0;
+    }
+   .row-offcanvas .navbar {
+    position: absolute;
+    z-index: 2;
+      right:0;
+      height:100%;
+      width:55px;
+      border:0;
+      background-color:transparent;
+    }
+    .row-offcanvas .navbar-toggle {
+      margin-right: 5px;
+      margin-left: 5px;
+    }
+    .row-offcanvas {
+      position: relative;
+    }
+    .row-offcanvas-right.active .navbar {
+    position: absolute;
+    z-index: 2;
+      right: -28.4%;
+      width:40%;
+      background-color:#eee;
+      border:0 solid #ddd;
+      border-left-width:1px;
+    }
+    .row-offcanvas-right.active {
+      left: -30%;
+    }
+    .row-offcanvas-right.active .navbar-collapse {
+      position: relative;
+      width: 100%;
+    }
+    .row-offcanvas .content {
+    /*width:calc(100% - 60px);*/
+    }
+  }
+  </style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">ANA 515 Assignment 1</h1>
+<h2 class="author">Emily Zhao</h2>
+<h3 class="date">2022</h3>
+</div>
+<div id="wrap">
+<div class="container">
+<div class="row row-offcanvas row-offcanvas-right">
+<div class="contents col-xs-12 col-md-10">
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">#The include = FALSE function hides both the code and output in my output document
+
+#You need to install these packages first to be able to use the functions within them. You can install them from the Tools tab or write a new code chunk: install.packages("package_name"). 
+
+#install.packages("tidyverse")
+#install.packages("knitr")
+#install.packages("bslib")
+
+#library(devtools)
+#install_github('rstudio/rmarkdown')
+#install.packages('knitr', repos = c('http://rforge.net', 'http://cran.rstudio.org'),
+                # type = 'source')
+#install_github('jimhester/knitrBootstrap')
+#library(rmarkdown)
+library(knitrBootstrap)</code></pre>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>code chunk to get the dataset from GitHub/fivethirtyeight</li>
+</ol>
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">url <- "https://raw.githubusercontent.com/fivethirtyeight/guns-data/master/full_data.csv"
+library(tidyverse)</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.6     v dplyr   1.0.8
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1
+</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+</code></pre>
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">#library(knitr)
+library(bslib)</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## 
+## Attaching package: 'bslib'
+</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## The following object is masked from 'package:utils':
+## 
+##     page
+</code></pre>
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">library(ggplot2)
+library(dplyr)
+gun <- read_csv(url)</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## New names:
+## * `` -> ...1
+</code></pre>
+<button class="message R toggle btn btn-xs btn-info">
+<span class="glyphicon glyphicon-chevron-down"></span> R message
+</button>
+<pre style=""><code class="message r">## Rows: 100798 Columns: 11
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (6): month, intent, sex, race, place, education
+## dbl (5): ...1, year, police, age, hispanic
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre>
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">glimpse(gun)</code></pre>
+<button class="output R toggle btn btn-xs btn-success">
+<span class="glyphicon glyphicon-chevron-down"></span> R output
+</button>
+<pre style=""><code class="output r">## Rows: 100,798
+## Columns: 11
+## $ ...1      <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1~
+## $ year      <dbl> 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, 2012, ~
+## $ month     <chr> "01", "01", "01", "02", "02", "02", "02", "03", "02", "02", ~
+## $ intent    <chr> "Suicide", "Suicide", "Suicide", "Suicide", "Suicide", "Suic~
+## $ police    <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ sex       <chr> "M", "F", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", ~
+## $ age       <dbl> 34, 21, 60, 64, 31, 17, 48, 41, 50, NA, 30, 21, 43, 34, 27, ~
+## $ race      <chr> "Asian/Pacific Islander", "White", "White", "White", "White"~
+## $ hispanic  <dbl> 100, 100, 100, 100, 100, 100, 100, 100, 100, 998, 100, 100, ~
+## $ place     <chr> "Home", "Street", "Other specified", "Home", "Other specifie~
+## $ education <chr> "BA+", "Some college", "BA+", "BA+", "HS/GED", "Less than HS~
+</code></pre>
+</div>
+<ol start="5" style="list-style-type: decimal">
+<li>code chunk to create a subset of gun_deaths</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Call the installed packages</li>
+<li>create a new dataset with the name of ‘youth’ from the dataset ‘gun_deaths’ that filters gun_deaths by age &lt;= 65</li>
+</ol>
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">#a
+library(tidyverse)
+#library(knitr)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+
+#b
+youth<-gun%>%filter(age<=65)</code></pre>
+</div>
+<ol start="7" style="list-style-type: decimal">
+<li>Write inline code that says: ##<code>We have data about 100798 individuals killed by guns. Only 15687 are older than 65.</code></li>
+</ol>
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">nrow(gun)-nrow(youth)</code></pre>
+<button class="output R toggle btn btn-xs btn-success">
+<span class="glyphicon glyphicon-chevron-down"></span> R output
+</button>
+<pre style=""><code class="output r">## [1] 15687
+</code></pre>
+</div>
+<ol start="8" style="list-style-type: decimal">
+<li>Code chunk to graph the distribution of the age variable from the youth dataset: Use the ggplot function:
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">youth%>%
+ggplot(aes(age))+
+geom_freqpoly(binwidth=1)</code></pre>
+<div class="row">
+<div class="col-md-offset-3 col-md-6">
+<a href="#" class="thumbnail"><img src="data:image/png;base64,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" /></a>
+</div>
+</div>
+</div></li>
+<li>Code chunk to graph the distribution of youth by race
+<div class="row">
+<button class="source R toggle btn btn-xs btn-primary">
+<span class="glyphicon glyphicon-chevron-down"></span> R source
+</button>
+<pre style=""><code class="source r">#Once all of my code has been written, I click on the Knit button in the tool bar above to produce my document.
+youth %>% 
+ggplot(aes(fct_infreq(race) %>% fct_rev())) + 
+geom_bar() + coord_flip() + 
+labs(x = "Victim race") </code></pre>
+<div class="row">
+<div class="col-md-offset-3 col-md-6">
+<a href="#" class="thumbnail"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABEVBMVEUAAAAAAGYAOmYAOpAAZrYzMzM6AAA6ADo6AGY6OpA6ZmY6kNtNTU1NTW5NTY5NbqtNjshZWVlmAABmADpmAGZmOjpmOpBmtttmtv9uTU1uTW5uTY5ubm5ubqtujo5ujshuq6tuq+SOTU2OTW6OTY6Obo6ObquOjo6OjsiOq6uOq+SOyOSOyP+QOgCQOjqQ2/+rbk2rbm6rbo6rjm6rjqurq26rq8iryP+r5P+2ZgC2Zjq2/7a2///Ijk3Ijm7Ijo7IyI7IyP/I/8jI/+TI///bkDrb25Db/9vb///kq27kq47kyI7k5P/k/8jk/+Tk///r6+v/tmb/yI7/25D/5Kv/5OT//7b//8j//9v//+T////ryP7fAAAACXBIWXMAAAsSAAALEgHS3X78AAASh0lEQVR4nO2dAX/T1gHE05Ws7SoSj3YbWUmpoIStNYUy1poNp2wLW03beQiDsb7/B9mTTkmMEoKx3sXnvLvfr8LW+fke9/eTZDfEG6WVpDZWPQFrNTL4RGXwicrgE5U++P+9rvb9d3A7DL1IsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsah17cD/1npXGXyiMvhEZfCJyuATlcEnKoNPVAafqAw+URl8ojL4RGXwicrgE5XBJyqDT1QGn6gMPlEZfKIy+ERl8InK4BOVwScqg09UBp+oDD5RGXyiMvhEZfCJyuATlcEnKoNPVAafqAw+URl8ojL4RGXwicrgE5XBJyqDT1Sy4GffDsrJH8N/uz/l4W6Rly/Gx67Bd5Us+HLUL0e380C8yOv70z2Djyhd8JPr5Q//3BvvD4rPd7YOinyU9aY3su1Af3Nzs/XYVbe4hjq1cwnw071f9v57/1/3D4rt8ahf5GHFh4NAs/y94rtKd8WXPzzOy9Gfr1esG/DDLMt6tWfwXSUMfnQtLPBr+Rz4sOIbGXxXCYOffHZQTm8ODsHP7lXn+MyH+jgSBn+WDL6rDD5RGXyiMvhEZfCJyuATlcEnKoNPVAafqAw+URl8ojL4RGXwicrgE5XBJyqDT1QGn6gMPlEZfKIy+ERl8InK4BOVwScqg09UBp+oDD5RGXyiMvhEZfCJyuATlcEnKoNPVAafqAw+URl8oroY4Nv338HtMPQixaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaLWtQO/6o/BGsUgwHUNnqIYBLiuwVMUgwDXNXiKYhDgugZPUQwCXNfgKYpBgOsaPEUxCHBdg6coBgGua/AUxSDAdQ2eohgEuK7BUxSDANc1eIpiEOC6Bk9RDAJc1+ApikGA6xo8RTEIcF2DpygGAa5r8BTFIMB1DZ6iGAS4rsFTFIMA1zV4imIQ4LoGT1EMAlzX4CmKQYDrGjxFMQhwXYOnKAYBrmvwFMUgwHUNnqIYBLiuwVMUgwDXNXiKYhDgugZPUQwCXNfgKYpBgOsaPEUxCHBdg6coBgGua/AUxSDAdQ2eohgEuK7BUxSDANc1eIpiEOC6Bk9RDAJc1+ApikGA664F+CLLsu1xkc/tObrdmvaqiTeKQYDrrgf4gHl/YPAx3bUB/8NBkU92ssuD2b1sK9ye3Qs7Nzc3Ww9dNfFGK6kppkTAh0N9BfvFuBz1w6ug6BVf3BzAa71eV028UYylx3XXZsWP8mqVZ1l/1K/2hKUPrzXtVRNvFIMA110f8GGp7w/KYbXiJ7s/5dO9ce21pr1q4o1iEOC66wG+uaoPf97Oy2FY7YH+qFd7rWmvmnijGAS47lqAP0utaa+aeKMYBLiuwVMUgwDXNXiKYhDgugZPUQwCXNfgKYpBgOsaPEUxCHBdg6coBgGua/AUxSDAdQ2eohgEuK7BUxSDANc1eIpiEOC6Bk9RDAJc1+ApikGA6xo8RTEIcF2DpygGAa5r8BTFIMB1DZ6iGAS4rsFTFIMA1zV4imIQ4LoGT1EMAlzX4CmKQYDrGjxFMQhwXYOnKAYBrmvwFMUgwHUNnqIYBLiuwVMUgwDXNXiKYhDgugZPUQwCXNfgKYpBgOsaPEUxCHBdg6coBgGua/AUxSDAdQ2eohgEuK7BUxSDANc1eIpiEOC6Fw08owquqxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWtcOfIdP2dQIrCgWtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa3H4F9e2fjDN3dXRPcMtaZt8F1jUesR+Fd3rj68+vyjH1fF941qTdvgu8ai1iPwLz999PBq2KyK7xvVmrbBd41Fra+v+Gfve8VHd9ViUetr5/iN9/QWvMHHjkWtvqqnu2qxqPUYfDjMP//AV/XxXbVY1Hp8jq/eyvmqnuCqxaLW+av6ZiOm1rQNvmssap2/qq8P96vi+0a1pm3wXWNRq6/q6a5aLGr1VT3dVYtFrcfgn2xsSC751rQNvmssaj2+uPvk7sOrzy6tCu+b1Zq2wXeNRa3zV/VPPvZVPcFVi0Wt8+/jn10yeIKrFota5z+5+8+djY9XRPcMtaZt8F1jUevrH+AoqjVtg+8ai1oNnu6qxaLW40P9w6srIvsWtaZt8F1jUevxir/i9/EcVy0WtfqTO7qrFotaDZ7uqsWiVoOnu2qxqHVl4CfXw2Z/UOSnmfN7W9M2+K6xqHXV4N/+wNa0Db5rLGqdezt3vlf1Ryt+eiPbOig+39k6mOxklwdFVt3NZ/fCH2W5ubnZGrcE+PP6K62VVvYBTqCcVZzzUb+c/Vxsj4v8xbgc9YtetcnDwT7cqtR6vXrFd41tgS//dr4/YTu/4iv+YUdY5VlgXoMPL4dGrWkbfNfYNvhz/kGM+Yu7sMB7YRPO+MND8NUrYXds8ITYFvhzP9Qfgh/VJ/Vr1SbLbucN+HIYjgOlwRNiW+DP+1D/uk5/V1erNW2D7xqLWkU+qzf484tFrf7kju6qxaLWBvzLT//u/ztHctViUatXPN1Vi0Wt/rdzdFctFrU24F/d2ajlfzsX31WLRa3+mTu6qxaLWv2LEeiuWixq9S9GoLtqsajVF3d0Vy0WtfoXI9BdtVjU6l+MQHfVYlGrP8Chu2qxqNUf2dJdtVjUegj+iuDZHWpN2+C7xqLWo0P9818LrvZKrWkbfNdY1Dp3jg9Xd4r/brI1bYPvGotaX7+4eyi46lvTNviusah1HvwTr3iGqxaLWud/9Erw96CUBh89FrUeXdULHuSh1rQNvmssavUHOHRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1rh34C0RgRbGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGode3Atz6Ni1IF11WLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlGrwdNdtVjUavB0Vy0WtRo83VWLRa0GT3fVYlFrDPDDXnOjyOf2zr4rsizbOjjeE+zJTn78oOne+OSwshz1DZ4ZGw389Natg1N2T76vgJ4F1eBXEotaI4Af5QHV9EZY3EU+2ckuD4p6oT8dAHy9a3avsYOb13cA/sSwsONaP2y2x8W18KDNzc1WWgO++7QTV3fws28Hk91xYD/7uchfjMOCLXphM3swxqEeu/Ky6IVNeFiR13fKGvyJYWHHsI9HNSeQ1uvVK75rbCzwYbWG5RoWabOYs34NePJVcwivd9WH70Pwh8dyrPjXh+0PwmYYXjG9wxNAa9oG3zU2FvhhvzlLV0s5cBuC4NNBA/5w12T3p+MVH44Rh+f414cdrvjjM39r2gbfNTYS+OmXB9Xmr1l9sg5H99sV2NHXD8YNunpXOaxXNsDXd0oc6lvD+ofn+Cw3eFJsJPB0taZt8F1jUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrQZPd9ViUavB0121WNRq8HRXLRa1GjzdVYtFrWsH/gIRWFEsajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosal078Gd9brdmBFYUi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaJWg6e7arGo1eDprlosajV4uqsWi1oNnu6qxaLW08BPPjsoy/0B7rwYF3n7AcPeyUEnHzX7bqEnmt978hEGHz32DPA7vSNe073xCX9669bBKcNOPM33Cz2RwZ9z7Bngrw/7gddkJ7s8GGW9Ig/QZvcPpjey7RreKB/1y+Lzna3H2Rb2Fte2Hueze+FuPajIwq3y6WCxJ8prP+zcOijCk+RzT1Fubm62JleDX+BlZ52t08FPvzzYH7wYl6N+QBWWYYB3vawhBXv27WCyOy62x6Ne2FfvLXrVJi+LXj2oqIzZg/FiT5TXftg5+7n44uagPH6Kejat16tXfNfYs8AHgvuDsIKzhldRLc1hlmXVyT2syGpJVnsDnHrv4UMCzGpQbUy+WvSJ4N+o1/nlwdxTGPy5gy+Hlwfh5DxseNUn4wZE2Fk26zvHSq3PzfWeye5fqkG18XSw6BPVfonb4WH7R09h8OcPfnqzOs3eDquxWs715XdYk1m4GY7e1eZxA77ei1fBEOfm29Xd0dcPxos+Ue2PsvocX456R09h8H4ffyyD7xqLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsajV4OmuWixqNXi6qxaLWg2e7qrFolaDp7tqsah17cBfIAIrikWtBk931WJRq8HTXbVY1GrwdFctFrUaPN1Vi0WtBk931WJRq8HTXbVY1GrwdFctFrUaPN1Vi0WtBk931WJRq8HTXbVY1GrwdFctFrUaPN1Vi0Wt+uBban850fkMvXixBp9orMEnGrt24K04MvhEZfCJyuAT1XqBn93LTvki6zNVfXVpNaq1WUD1t90uN/a0UYvPfbI7Xjr28mDBoesFvvpWw/47jRhmfYxqbRYYGl4yo3y5sfW36C4ZG1Btj5cbO/1TWS76t10v8E8Hp37T+Js1/UfAV49qbRYbXvSXHTu7f7Ds0NEXe+Plxk52su1Fh64X+P13BV+v23pUa7PQWHzR7TJjpzd6y8ZOdn9ZNrb6dt+vFhy6XuDfecXX4JddetWX3y59tDgxatGhoyzLlh37DrHrBf7dz/HNl9Uvc7KdfHaw8BnztNBlz/Elvnh7ydj2qItxjj/Xq/rqa+7zpS+vt5e8Mi9r8Pw3E+sF3oomg09UBp+oDD5RGXyiMvhEZfDx9fL3P656Cm+XwcfX848M/mLr+a833ntUPtnY+LiC/eqbu89/c2Xj0qs7G+/rkzf45fXyk7vlk0vPP3wUbjTgw+1PH3nFX3AB8LNLZfnwagP+cLvqqb1dBr+8WuCP173BX2xVh/pn7/8bh/oPHz3/wOAT0dHF3dWw6Dd+9bsG/MsrvrizVGXwicrgE5XBJyqDT1QGn6gMPlH9H8yODTaR8PUSAAAAAElFTkSuQmCC" /></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="navbar navbar-fixed-bottom navbar-inverse">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+</button>
+</div>
+<div id="bottom-navbar" class="navbar-collapse collapse navbar-responsive-collapse">
+<ul class="nav navbar-nav navbar-right">
+<li class="nav">
+<p class="navbar-text">
+Toggle
+</p>
+</li>
+<li class="dropup">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Code <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="dropdown-header">
+Languages
+</li>
+<li class="active">
+<a href="#" class="toggle-global source R" type="source.R">R</a>
+</li>
+<li>
+<a href="#" type="all-source" class="toggle-global">All</a>
+</li>
+</ul>
+</li>
+<li class="dropup">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Output <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li class="dropdown-header">
+Type
+</li>
+<li class="active">
+<a href="#" class="toggle-global message" type="message">message</a>
+</li>
+<li class="active">
+<a href="#" class="toggle-global output" type="output">output</a>
+</li>
+<li>
+<a href="#" type="all-output" class="toggle-global">All</a>
+</li>
+</ul>
+</li>
+<li class="active">
+<a href="#" type="figure" class="toggle-global">Figures</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="push">
+
+</div>
+<div id="footer">
+<div class="container">
+<p class="text-muted" id="credit">
+Styled with <a href="https://github.com/jimhester/knitrBootstrap">knitrBootstrap</a>
+</p>
+</div>
+</div>
+<link rel="stylesheet" id="theme" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" media="screen"></link><link rel="stylesheet" id="highlight" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/styles/default.min.css" media="screen"></link>
+</div></li>
+</ol>
+</body>
+</html>
